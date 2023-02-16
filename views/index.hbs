@@ -20,17 +20,18 @@
     <div class="col-8">
       <table class="table table-striped">
         <tbody>
+          {{#each expense}}
           <tr>
             <th scope="row">
               <div class="col d-flex justify-content-center align-items-center">
-                <i class="fa-solid fa-house" style="color:#8FD1DF;font-size: 2em" ;></i>
+                <i class="fa-solid {{this.icon}}" style="color:#8FD1DF;font-size: 2em" ;></i>
               </div>
             </th>
             <td>
-              <div class="item">午餐</div>
-              <div class="date">2022/3/3</div>
+              <div class="item">{{this.name}}</div>
+              <div class="date">{{this.date}}</div>
             </td>
-            <td class="price">60</td>
+            <td class="amount">{{this.amount}}</td>
             <td><a href="" style="color:black">修改</a></td>
             <td>
               <form action="">
@@ -38,6 +39,7 @@
               </form>
             </td>
           </tr>
+          {{/each}}
         </tbody>
       </table>
     </div>

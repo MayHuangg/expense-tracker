@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
+const routes = require('./routes')
 
 // set server
 const port = 3000
@@ -19,3 +20,6 @@ app.get('/', (req, res) => {
 
 // connect database
 require('./config/mongoose')
+
+// 用routers導向不同的頁面
+app.use(routes)

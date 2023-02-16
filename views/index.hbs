@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row d-flex flex-column align-items-center fs-4">
+    {{!-- 下拉式選單 --}}
     <div class="col-8 mt-5">
       <select class="form-select fs-4" aria-label="Default select example">
         <option>類別</option>
@@ -10,14 +11,14 @@
         <option value="3">其他</option>
       </select>
     </div>
-
+    {{!-- 總金額 --}}
     <div class="col-8 mt-3">
       <div class="row">
         <div class="col-4">總金額:</div>
         <div class="col-8 text-end" style="color:orange;font-size: 3em;">25260</div>
       </div>
     </div>
-
+    {{!-- 支出列表 --}}
     <div class="col-8">
       <table class="table table-striped">
         <tbody>
@@ -42,9 +43,9 @@
         </tbody>
       </table>
     </div>
-
+    {{!-- 新增支出的按鈕 --}}
     <div class="col-4">
-      <button class="w-100" style="background-color: #EC673E;color: white;border-radius: 5px">新增支出</button>
+      <a href="/expense/new"><button class="w-100" style="background-color: #EC673E;color: white;border-radius: 5px">新增支出</button></a>
     </div>    
   </div>
 </div>

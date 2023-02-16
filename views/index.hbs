@@ -4,11 +4,9 @@
     <div class="col-8 mt-5">
       <select class="form-select fs-4" aria-label="Default select example">
         <option>類別</option>
-        <option value="1">家居物業</option>
-        <option value="2">交通出行</option>
-        <option value="3">休閒娛樂</option>
-        <option value="3">餐飲食品</option>
-        <option value="3">其他</option>
+          {{#each categories}}
+            <option>{{this.name}}</option>
+          {{/each}}
       </select>
     </div>
     {{!-- 總金額 --}}

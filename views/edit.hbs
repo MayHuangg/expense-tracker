@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row d-flex flex-column align-items-center fs-4">
+    <div class="col-6 mt-5">
+      <form action="/expense" method="POST" style="w-100">
+        <div class="row">
+          <p class="col-4">*必填欄位</p>
+          <p class="col-8 p-0">請修改你的支出</p>
+        </div>
+        {{!-- 填寫支出內容 --}}
+        <div class="row mt-3">
+          <label for="name" class="col-4">名稱* :</label>
+          <input type="text" name="name" id="name" class="col-8" value={{expense.name}} required>
+        </div>
+        {{!-- 填寫支出日期 --}}
+        <div class="row mt-3">
+          <label for="date" class="col-4">日期*:</label>
+          <input type="date" name="date" id="date" class="col-8" value={{expense.date}} required>
+        </div>
+        {{!-- 選擇支出類別 --}}
+        <div class="row mt-3">
+          <label for="category" class="col-4">類別*:</label>
+          <div class="col-8 p-0">
+            <select class="fs-4 w-100" aria-label="Default select example" name="category" id="category">
+              <option>{{expense.category}}</option>
+                {{#each categories}}
+                <option value={{this._id}}>
+                  {{this.name}}</option>
+                {{/each}}
+            </select>
+          </div>
+        </div>
+        {{!-- 填寫支出金額 --}}
+        <div class="row mt-3">
+          <label for="amount" class="col-4">金額*:</label>
+          <input type="number" name="amount" id="amount" min="0" class="col-8" value={{expense.amount}} required>
+        </div>
+        {{!-- 送出按鈕 --}}
+        <div class="row mt-5">
+          <div class="col-8 offset-4 p-0">
+            <button class="w-100" style="background-color: white;border-radius: 5px">送出</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

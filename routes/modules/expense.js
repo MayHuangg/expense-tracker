@@ -44,9 +44,19 @@ router.put('/:id', async(req, res) => {
   const {name, date, categoryId, amount} = req.body
   const _id = req.params.id
   // 不知道為何這裡沒辦法用.save()，似乎和model和document有關
+  // https://masteringjs.io/tutorials/mongoose/update
   Expense.updateOne({ _id },{name, date, categoryId, amount})
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))  
+})
+
+// 將使用者欲刪除的資料自資料庫刪除
+router.delete('/:id', (req, res) => {
+  const _id = req.params.id
+  Expense.findById({ _id })
+    .then(data=> data.remove())
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(data))
 })
 
 module.exports = router

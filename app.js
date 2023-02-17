@@ -5,6 +5,7 @@ const routes = require('./routes')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const usePassport = require('./config/passport')
 
 // set server
 const port = 3000
@@ -16,11 +17,13 @@ app.listen(port, () => {
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
+// authenticate 
 app.use(session({
   secret: 'thisIsSecret',
   resave: false,
   saveUninitialized: true
 }))
+usePassport(app)
 
 // 取得req.body中的資料
 app.use(bodyParser.urlencoded({ extended: true }))

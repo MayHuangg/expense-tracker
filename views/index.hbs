@@ -2,12 +2,16 @@
   <div class="row d-flex flex-column align-items-center fs-4">
     {{!-- 下拉式選單 --}}
     <div class="col-8 mt-5">
-      <select class="form-select fs-4" aria-label="Default select example">
+      <form action="/" method="post">
+      <label for="menu"></label>
+      <select class="form-select fs-4" aria-label="Default select example" name="menu"
+      id="menu" onchange="this.form.submit()">
         <option>類別</option>
           {{#each categories}}
-            <option>{{this.name}}</option>
+            <option value={{this._id}}>{{this.name}}</option>
           {{/each}}
       </select>
+      </form>
     </div>
     {{!-- 總金額 --}}
     <div class="col-8 mt-3">

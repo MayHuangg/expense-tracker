@@ -3,12 +3,16 @@ const app = express()
 const exphbs = require('express-handlebars')
 const routes = require('./routes')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 // set server
 const port = 3000
 app.listen(port, () => {
   console.log(`the appliecation is running on port ${port}`)
 })
+
+// 讓put,delete等詞得以使用(?)
+app.use(methodOverride('_method'))
 
 // set veiw engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))

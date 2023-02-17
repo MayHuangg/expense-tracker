@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row d-flex flex-column align-items-center fs-4">
     <div class="col-6 mt-5">
-      <form action="/expense" method="POST" style="w-100">
+      <form action="/expense/{{expense._id}}?_method=PUT" method="POST" style="w-100">
         <div class="row">
           <p class="col-4">*必填欄位</p>
           <p class="col-8 p-0">請修改你的支出</p>
@@ -18,10 +18,10 @@
         </div>
         {{!-- 選擇支出類別 --}}
         <div class="row mt-3">
-          <label for="category" class="col-4">類別*:</label>
+          <label for="categoryId" class="col-4">類別*:</label>
           <div class="col-8 p-0">
-            <select class="fs-4 w-100" aria-label="Default select example" name="category" id="category">
-              <option>{{expense.category}}</option>
+            <select class="fs-4 w-100" aria-label="Default select example" name="categoryId" id="categoryId">
+              <option value={{expense.categoryId}}>{{expense.category}}</option>
                 {{#each categories}}
                 <option value={{this._id}}>
                   {{this.name}}</option>

@@ -39,4 +39,14 @@ router.get('/:id/edit', async(req, res) => {
     .then(() => res.render('edit', { expense, categories }))
 })
 
+// 將使用者修改完成的資料傳到後端
+router.put('/:id', async(req, res) => {
+  const {name, date, categoryId, amount} = req.body
+  const _id = req.params.id
+  // 不知道為何這裡沒辦法用.save()，似乎和model和document有關
+  Expense.updateOne({ _id },{name, date, categoryId, amount})
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))  
+})
+
 module.exports = router

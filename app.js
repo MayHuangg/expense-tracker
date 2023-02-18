@@ -25,6 +25,13 @@ app.use(session({
 }))
 usePassport(app)
 
+// 依照登入狀態切換"登入""登出"的字樣//要再查查看為甚麼只有這個要加入next
+app.use((req, res ,next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
 // 取得req.body中的資料
 app.use(bodyParser.urlencoded({ extended: true }))
 

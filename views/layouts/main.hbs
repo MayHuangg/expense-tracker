@@ -15,10 +15,15 @@
           家庭記帳本
         </span>
       </a>
-      
+      {{#if isAuthenticated}}
       <a href="/users/logout">
         <button class="fs-5 fw-bold" style="border-radius: 5px;color: #EC673E;border: ">登出</button>
       </a>
+      {{else}}
+        <a href="/users/login">
+          <button class="fs-5 fw-bold" style="border-radius: 5px;color: #EC673E;border: ">登入</button>
+        </a>
+      {{/if}}
     </div>
   </nav>
 

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const usePassport = require('./config/passport')
+const flash = require('connect-flash')
 
 // set server
 const port = 3000
@@ -25,10 +26,17 @@ app.use(session({
 }))
 usePassport(app)
 
-// 依照登入狀態切換"登入""登出"的字樣//要再查查看為甚麼只有這個要加入next
+// message on register and login page
+app.use(flash())
+
+// 依照登入狀態切換"登入""登出"的字樣和依狀態跳出messages on register and login page
+// 要再查查看為甚麼只有這個要加入next(未釐清)
+// 我原以為它似乎要放在app.use(routes)的後面(未釐清)
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 

@@ -6,10 +6,11 @@ const Expense = require('../../models/expense')
 // show all expense and drop-down menu on index page
 router.get('/', async (req, res) => {
   const categories = await Category.find().lean()
+  const userId = req.user._id
   let allExpenses = {}
   let totalAmount = 0
 
-  Expense.find()
+  Expense.find({ userId })
     .lean()
     .then(expenses => {
       for (let i = 0; i < expenses.length; i++) {
@@ -39,8 +40,10 @@ router.post('/', async (req, res) => {
   let totalAmount = 0
   // 取得使用者選擇的類別
   const { categoryId } = req.body
+  // 取得使用者的id
+  const userId = req.user._id
   // 從資料庫抓出符合該類別的資料
-  Expense.find({ categoryId })
+  Expense.find({ categoryId, userId })
     .lean()
     .then(expenses => {
       // 找出與使用者選擇的類別相符的icon string

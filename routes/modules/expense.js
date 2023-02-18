@@ -13,16 +13,18 @@ router.get('/new', (req, res) => {
 // 將使用者輸入的新增支出資料傳來後端
 router.post('/', (req, res) => {
   const { name, date, categoryId, amount } = req.body
-  Expense.create({ name, date, categoryId, amount })
+  const userId = req.user._id
+  Expense.create({ name, date, categoryId, amount, userId })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
 // 進入修改資料的頁面
 router.get('/:id/edit', async (req, res) => {
   const _id = req.params.id
+  const userId = req.user._id
   const categories = await Category.find().lean()
   let expense = {}
-  Expense.findById(_id)
+  Expense.findOne({ _id, userId })
     .lean()
     .then((data) => {
       // 因為expense的db中只有categoryId，因此要從category的db抓出確切種類名稱
@@ -44,9 +46,10 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { name, date, categoryId, amount } = req.body
   const _id = req.params.id
+  const userId = req.user._id
   // 不知道為何這裡沒辦法用.save()，似乎和model和document有關
   // https://masteringjs.io/tutorials/mongoose/update
-  Expense.updateOne({ _id }, { name, date, categoryId, amount })
+  Expense.updateOne({ _id }, { name, date, categoryId, amount, userId })
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))
 })
@@ -54,7 +57,9 @@ router.put('/:id', async (req, res) => {
 // 將使用者欲刪除的資料自資料庫刪除
 router.delete('/:id', (req, res) => {
   const _id = req.params.id
-  Expense.findById({ _id })
+  const userId = req.user._id
+
+  Expense.findById({ _id, userId })
     .then(data => data.remove())
     .then(() => res.redirect('/'))
     .catch(err => console.log(err))

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport')
-const { error } = require('console')
+const bcrypt = require('bcryptjs')
 
 router.get('/login', (req, res) => {
   res.render('login')
@@ -43,9 +43,11 @@ router.post('/register', (req, res) => {
         })
       } else {
         // 如果尚未註冊，則將資料寫入資料庫
-        User.create({ name, email, password })
-          .then(() => res.redirect('/users/login'))
-          .catch(err => console.log(err))
+        bcrypt.genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({ name, email, password: hash }))
+        .then(() => res.redirect('/users/login'))
+        .catch(err => console.log(err))
       }
     })
     .catch(err => console.log(err))

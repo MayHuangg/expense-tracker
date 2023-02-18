@@ -15,9 +15,9 @@
           <input type="date" name="date" id="date" class="col-8" required>
         </div>
         <div class="row mt-3">
-          <label for="category" class="col-4">類別*:</label>
+          <label for="categoryId" class="col-4">類別*:</label>
           <div class="col-8 p-0">
-            <select class="fs-4 w-100" aria-label="Default select example" name="category" id="category">
+            <select class="fs-4 w-100" aria-label="Default select example" name="categoryId" id="categoryId">
               <option>類別</option>
               {{#each categories}}
               <option value={{this._id}}>{{this.name}}</option>

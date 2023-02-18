@@ -3,9 +3,9 @@
     {{!-- 下拉式選單 --}}
     <div class="col-8 mt-5">
       <form action="/" method="post">
-      <label for="menu"></label>
-      <select class="form-select fs-4" aria-label="Default select example" name="menu"
-      id="menu" onchange="this.form.submit()">
+      <label for="categoryId"></label>
+      <select class="form-select fs-4" aria-label="Default select example" name="categoryId"
+      id="categoryId" onchange="this.form.submit()">
         <option>類別</option>
           {{#each categories}}
             <option value={{this._id}}>{{this.name}}</option>
@@ -24,7 +24,7 @@
     <div class="col-8">
       <table class="table table-striped">
         <tbody>
-          {{#each expense}}
+          {{#each allExpenses}}
           <tr>
             <th scope="row">
               <div class="col d-flex justify-content-center align-items-center">

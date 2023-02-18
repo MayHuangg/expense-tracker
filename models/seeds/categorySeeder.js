@@ -1,11 +1,9 @@
-const mongoose = require('mongoose')
 const Category = require('../category')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
+const db = require('../../config/mongoose')
 db.on('error', () => {
   console.log('mongodb error!')
 })
@@ -22,5 +20,5 @@ db.once('open', () => {
     const icon = categories[i].icon
     Category.create({ name, icon })
   }
-  console.log('done')
+  process.exit()//不加這行連線就不會結束，就無法順利跑到recordSeeder
 })

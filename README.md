@@ -26,3 +26,9 @@ npm run start //啟動專案
 npm run seed //建立種子資料
 ```
 4.進入 http://localhost:3000 即可使用此專案。
+可使用已建立好的種子資料，利用此帳號密碼登入。
+
+```
+帳號:test@example.com
+密碼:123
+```

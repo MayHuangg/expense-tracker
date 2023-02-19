@@ -11,7 +11,7 @@ if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 // set server
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`the appliecation is running on port ${port}`)
 })
